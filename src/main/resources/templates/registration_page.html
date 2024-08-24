@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Registration</h1>
+    <form th:action="@{/registration}" method="post" th:object="${user}" class="mt-4">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input name="username" id="username" type="text" class="form-control" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input name="password" id="password" type="password" class="form-control" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+    <a href="/" class="btn btn-link mt-3">Main page</a>
+    <a href="/login" class="btn btn-link mt-3">Login</a>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

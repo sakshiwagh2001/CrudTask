@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div th:insert="~{parts/navigation::navigation}"></div>
+<div class="container mt-4">
+    <h1>Welcome to the book page <span th:text="${userLogin}"></span></h1>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn btn-danger">Logout</button>
+    </form>
+    <table class="table mt-4">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Year</th>
+            <th sec:authorize="hasRole('ADMIN')">Edit</th>
+            <th sec:authorize="hasRole('ADMIN')">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${userBooks}">
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.year}"></td>
+
+            <span th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+            <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                <a th:href="@{|/books/edit/${book.title}|}" class="btn btn-warning">Edit</a>
+            </td>
+            <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                <a th:href="@{|/books/delete/${book.title}|}" class="btn btn-danger">Delete</a>
+            </td>
+            </span>
+
+        </tr>
+        </tbody>
+    </table>
+    <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" href="/books/create" class="btn btn-primary">Add new book</a>
+
+</div>
+<div th:insert="~{parts/footer::footer}"></div>
+</body>
+</html>
